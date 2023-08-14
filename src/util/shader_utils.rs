@@ -4,7 +4,7 @@ use std::io::Read;
 use std::ptr;
 use gl::types::{GLenum, GLuint};
 
-pub(crate) struct ShaderUtils {}
+pub struct ShaderUtils {}
 
 impl ShaderUtils {
     pub fn get_shader_code(path: &str) -> String {

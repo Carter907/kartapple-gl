@@ -1,10 +1,27 @@
+use std::alloc::System;
+use std::time::SystemTime;
 use gl::types::GLuint;
 use crate::core::window::Window;
 
+pub struct DeltaTime {
+    total_time: u128,
+    pub value: u128,
+    at_iteration: SystemTime,
+}
+impl DeltaTime {
+    pub(crate) fn calc_time(&mut self) {
+
+        self.value = self.at_iteration.elapsed().unwrap().as_millis();
+        self.total_time += self.value;
+        self.at_iteration = SystemTime::now();
+
+    }
+}
 
 pub struct KukariApp {
     pub window: Window,
     pub program: Option<GLuint>,
+    pub delta: DeltaTime,
 }
 
 impl KukariApp {
@@ -14,7 +31,12 @@ impl KukariApp {
     pub fn new(width: u32, height: u32, title: &str) -> KukariApp {
         KukariApp {
             window: Window::new(width, height, title),
-            program: Option::None,
+            program: None,
+            delta: DeltaTime {
+                total_time: 0,
+                value: 0,
+                at_iteration: SystemTime::now(),
+            }
         }
     }
     pub fn init(&mut self) {
@@ -23,22 +45,12 @@ impl KukariApp {
     pub fn set_program(&mut self, program_id: GLuint) {
         self.program = Some(program_id);
     }
-    pub fn start(&mut self) {
+    pub fn update(&mut self) {
+        self.window.update();
 
-
-        // Create a windowed mode window and its OpenGL context
-        // Make the window's context current
-
-
-        // Loop until the user closes the window
-        while !self.window.should_close() {
-            // Swap front and back buffers
-            // and poll events
-
-
-        }
-        self.shutdown();
     }
-
+    pub fn calc_time(&mut self) {
+        self.delta.calc_time();
+    }
     fn shutdown(&self) {}
 }

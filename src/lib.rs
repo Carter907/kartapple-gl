@@ -5,15 +5,15 @@
 
 pub mod core;
 pub mod util;
-
+pub extern crate glfw;
+pub extern crate gl;
+pub extern crate cgmath;
 
 
 
 #[cfg(test)]
 mod tests {
 
-    extern crate glfw;
-    extern crate gl;
 
     use std::cmp::Ordering;
     use std::ffi::CString;
@@ -80,9 +80,7 @@ mod tests {
 
                 application.window.update();
                 application.window.process_events();
-                delta_time = time_elapsed.elapsed().unwrap().as_millis();
-                tot_time += delta_time;
-                time_elapsed = SystemTime::now();
+
                 println!("{delta_time:?}");
             }
         }

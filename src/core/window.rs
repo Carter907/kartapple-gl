@@ -8,6 +8,8 @@ pub struct Window {
     pub glfw: Glfw,
     pub window: glfw::Window,
     pub events: Receiver<(f64, WindowEvent)>,
+    pub width: u32,
+    pub height: u32,
 }
 
 impl Window {
@@ -23,6 +25,8 @@ impl Window {
             glfw,
             window,
             events,
+            width,
+            height,
         }
     }
 
