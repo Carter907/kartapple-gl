@@ -1,4 +1,4 @@
-use crate::util::shader_utils::ShaderUtils;
+use crate::kart_graph::util::shader_utils::ShaderUtils;
 
 pub struct ProgramUtils {}
 

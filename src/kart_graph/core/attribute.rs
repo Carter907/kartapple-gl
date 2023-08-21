@@ -4,7 +4,7 @@ use std::collections::HashMap;
 use std::mem::size_of_val;
 use std::os::raw::c_void;
 use gl::types::{GLchar, GLsizeiptr, GLuint};
-use crate::core::gl_var_type::GLvartype;
+use crate::kart_graph::core::gl_var_type::GLvartype;
 
 //
 // INT(1),

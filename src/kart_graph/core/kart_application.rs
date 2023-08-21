@@ -1,7 +1,7 @@
 use std::alloc::System;
 use std::time::SystemTime;
 use gl::types::GLuint;
-use crate::core::window::Window;
+use crate::kart_graph::core::window::Window;
 
 pub struct DeltaTime {
     total_time: u128,
@@ -18,18 +18,18 @@ impl DeltaTime {
     }
 }
 
-pub struct KukariApp {
+pub struct Kartappl {
     pub window: Window,
     pub program: Option<GLuint>,
     pub delta: DeltaTime,
 }
 
-impl KukariApp {
+impl Kartappl {
     pub fn should_close(&mut self) -> bool {
         self.window.should_close()
     }
-    pub fn new(width: u32, height: u32, title: &str) -> KukariApp {
-        KukariApp {
+    pub fn new(width: u32, height: u32, title: &str) -> Kartappl {
+        Kartappl {
             window: Window::new(width, height, title),
             program: None,
             delta: DeltaTime {

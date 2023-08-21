@@ -1,7 +1,6 @@
 use std::any::Any;
 use std::ffi::CString;
 use gl::types::{GLint, GLuint};
-use crate::core::gl_var_type::GLvartype;
 
 pub struct Uniform {}
 

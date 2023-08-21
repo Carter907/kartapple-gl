@@ -3,8 +3,8 @@
 #![allow(unused)]
 
 
-pub mod core;
-pub mod util;
+pub mod kart_graph;
+
 pub extern crate glfw;
 pub extern crate gl;
 pub extern crate cgmath;
@@ -24,7 +24,7 @@ mod tests {
     use gl::types::{GLchar, GLfloat, GLsizeiptr, GLuint};
     use crate::core::attribute::Attribute;
     use crate::core::gl_var_type::GLvartype;
-    use crate::core::kukari_app::KukariApp;
+    use crate::core::kart_application::Kartappl;
     use crate::core::uniform::Uniform;
     use crate::util::program_utils::ProgramUtils;
     use crate::util::shader_utils::ShaderUtils;
@@ -33,7 +33,7 @@ mod tests {
     #[test]
     fn it_works() {
         unsafe {
-            let mut application = KukariApp::new(700, 500, "window");
+            let mut application = Kartappl::new(700, 500, "window");
             application.init();
 
             let mut program: GLuint = GLuint::from(1u32);
