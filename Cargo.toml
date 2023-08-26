@@ -4,6 +4,7 @@ version = "0.2.0"
 edition = "2021"
 description = "a graphics engine using gl, glfw, and cgmath for 2d and 3d games"
 license = "MIT"
+repository = "https://github.com/Carter907/kart-graphics-engine"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
