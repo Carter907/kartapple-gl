@@ -49,8 +49,8 @@ impl<T : KeyHandler> Window<T> {
         self.key_handler = Some(key_handler);
     }
     pub fn init_gl(&mut self) {
-        self.glfw_win.make_current();
         gl::load_with(|s| self.glfw_win.get_proc_address(s) as *const _);
+
     }
 
     pub fn should_close(&mut self) -> bool {
