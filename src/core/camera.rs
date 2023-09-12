@@ -14,6 +14,7 @@ pub struct Camera {
 }
 
 impl Camera {
+    /// Creates a new Camera. takes in the program of the app as well as the model, view, and projection matrices.
     pub unsafe fn new(program: GLuint, model_name: &str, view_name: &str, projection_name: &str) -> Camera {
         Camera {
             projection: Matrix4::identity(),
@@ -24,6 +25,7 @@ impl Camera {
             proj_id: Uniform::locate_uniform(program, projection_name),
         }
     }
+    /// Should be called in the on_loop method, this updates the Camera matrices.
     pub unsafe fn update(&self) {
         gl::UniformMatrix4fv(self.model_id, 1, gl::FALSE, self.model.as_ptr());
         gl::UniformMatrix4fv(self.view_id, 1, gl::FALSE, self.view.as_ptr());
@@ -33,7 +35,7 @@ impl Camera {
     pub fn projection(&mut self, perspective: PerspectiveFov<f32>) {
         self.projection = Matrix4::from(perspective);
     }
-
+    /// rotates the view by angle in the y axis. angle is measured in degrees.
     pub fn rotate_view_y(&mut self, angle: f32) {
         self.view =  self.view * Matrix4::from_angle_y(Deg(angle));
     }

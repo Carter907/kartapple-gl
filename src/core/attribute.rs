@@ -11,7 +11,7 @@ use crate::core::gl_var_type::GLvartype;
 pub struct Attribute;
 impl Attribute {
 
-
+    /// Called first to generate the buffer arrays to hold the data
     pub unsafe fn init(data: &[f32]) {
         let mut bao = GLuint::from(1u32);
         gl::GenBuffers(1, &mut bao);
@@ -23,6 +23,7 @@ impl Attribute {
             gl::STATIC_DRAW,
         );
     }
+    /// Called after init to link the dbo with an attribute in the shader.
     pub unsafe fn locate_attribute(program: GLuint, name: &str, kind: GLvartype) {
         let name = CString::new(name).unwrap();
         let attrib = gl::GetAttribLocation(program,

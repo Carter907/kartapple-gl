@@ -30,9 +30,12 @@ pub struct KartApple {
 }
 
 impl KartApple {
+
+    /// Wrapper method that tests if the app's window should close.
     pub fn should_close(&mut self) -> bool {
         self.window.should_close()
     }
+    /// Creates a new KartApple application, the start method takes in a Scaffold as the blueprint of your opengl app.
     pub unsafe fn start(mut scaffold: impl AppScaffold, width: u32, height: u32, title: &str) {
         let mut kartapple = KartApple {
             window: Window::new(width, height, title),
@@ -51,20 +54,25 @@ impl KartApple {
         }
         kartapple.shutdown(&mut scaffold);
     }
+    /// First to be called in the start function, this method initializes gl and calls the scaffolds on_init method.
     unsafe fn init(&mut self, scaffold: &mut impl AppScaffold) {
         self.window.init_gl();
         scaffold.on_init(self);
     }
+    /// Sets the program for this KartApple application. this reference will used for various gl operations
     pub fn set_program(&mut self, program_id: GLuint) {
         self.program = Some(program_id);
     }
+
+    /// General method which is called on each iteration of the render loop. This in turn calls the scaffold's on_loop method as well
+    /// as swapping the frame buffers and calculating the delta time.
     pub unsafe fn update(&mut self, scaffold: &mut impl AppScaffold) {
         scaffold.on_loop(self);
         self.window.update_screen();
         self.delta.calc_time();
         self.process_events(scaffold);
     }
-
+    /// Iterates over the window events and invokes the appropriate Scaffold method depending on the WindowEvent variant.
     unsafe fn process_events(&mut self, scaffold: &mut impl AppScaffold) {
         let mut events: Vec<(f64, WindowEvent)> = flush_messages(&self.window.events)
             .into_iter()
@@ -82,6 +90,7 @@ impl KartApple {
             }
         }
     }
+    /// Wrapper method for AppScaffold's on_clean. For future implementation of abstracted clean up.
     unsafe fn shutdown(&mut self, scaffold: &mut impl AppScaffold) {
         scaffold.on_clean(self);
     }
