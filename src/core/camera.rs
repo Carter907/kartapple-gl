@@ -1,21 +1,26 @@
-use cgmath::*;
-use std::f32::consts::PI;
-use gl::types::*;
 use crate::core::uniform::Uniform;
+use cgmath::*;
+use gl::types::*;
+use std::f32::consts::PI;
 /// Camera for projecting a 3d scene unto a 2d screen. provides many methods for maniputing the view, model, and projection matrices.
 
 pub struct Camera {
     projection: Matrix4<f32>,
     view: Matrix4<f32>,
     model: Matrix4<f32>,
-        model_id: GLint,
+    model_id: GLint,
     view_id: GLint,
     proj_id: GLint,
 }
 
 impl Camera {
     /// Creates a new Camera. takes in the program of the app as well as the model, view, and projection matrices.
-    pub unsafe fn new(program: GLuint, model_name: &str, view_name: &str, projection_name: &str) -> Camera {
+    pub unsafe fn new(
+        program: GLuint,
+        model_name: &str,
+        view_name: &str,
+        projection_name: &str,
+    ) -> Camera {
         Camera {
             projection: Matrix4::identity(),
             view: Matrix4::identity(),
@@ -37,7 +42,7 @@ impl Camera {
     }
     /// rotates the view by angle in the y axis. angle is measured in degrees.
     pub fn rotate_view_y(&mut self, angle: f32) {
-        self.view =  self.view * Matrix4::from_angle_y(Deg(angle));
+        self.view = self.view * Matrix4::from_angle_y(Deg(angle));
     }
 
     pub fn rotate_view_x(&mut self, angle: f32) {
@@ -51,14 +56,14 @@ impl Camera {
         self.model = self.model * Matrix4::from_angle_y(Deg(angle))
     }
     pub fn rotate_model_x(&mut self, angle: f32) {
-        self.model = self.model *Matrix4::from_angle_x(Deg(angle));
+        self.model = self.model * Matrix4::from_angle_x(Deg(angle));
     }
 
     pub fn translate_view(&mut self, vec: Vector3<f32>) {
         self.view = self.view * Matrix4::from_translation(vec);
     }
     pub fn translate_view_z(&mut self, angle: f32) {
-        self.view = self.view * Matrix4::from_translation(Vector3::new(0f32,0f32,angle));
+        self.view = self.view * Matrix4::from_translation(Vector3::new(0f32, 0f32, angle));
     }
     pub fn translate_view_y(&mut self, angle: f32) {
         self.view = self.view * Matrix4::from_translation(Vector3::new(0f32, angle, 0f32));

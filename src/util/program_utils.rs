@@ -1,6 +1,5 @@
 use crate::util::shader_utils::ShaderUtils;
 
-
 /// ease of use class for creating and initializng a gl program.
 
 pub struct ProgramUtils {}

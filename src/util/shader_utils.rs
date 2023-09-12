@@ -1,17 +1,15 @@
+use gl::types::{GLenum, GLuint};
 use std::ffi::CString;
 use std::fs::*;
 use std::io::Read;
 use std::ptr;
-use gl::types::{GLenum, GLuint};
 /// std::fs utility that's used to get shader code.
 pub struct ShaderUtils {}
 
 impl ShaderUtils {
     pub fn get_shader_code(path: &str) -> String {
         let mut file = match File::open(path) {
-            Ok(file) => {
-                file
-            }
+            Ok(file) => file,
             Err(e) => {
                 panic!("{e:?}");
             }

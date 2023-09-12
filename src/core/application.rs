@@ -1,12 +1,12 @@
+use crate::core::key_handle::DefaultKeyHandler;
+use crate::core::scaffold::AppScaffold;
+use crate::core::window::Window;
+use gl::types::GLuint;
+use glfw::{flush_messages, Action, Key, WindowEvent, Context};
 use std::alloc::System;
 use std::io::Read;
 use std::ops::Deref;
 use std::time::SystemTime;
-use gl::types::GLuint;
-use glfw::{Action, flush_messages, Key, WindowEvent};
-use crate::core::key_handle::DefaultKeyHandler;
-use crate::core::scaffold::AppScaffold;
-use crate::core::window::Window;
 
 /// used to calculate and store helpful time calculations such as delta time and total time since game loop
 pub struct DeltaTime {
@@ -30,7 +30,6 @@ pub struct KartApple {
 }
 
 impl KartApple {
-
     /// Wrapper method that tests if the app's window should close.
     pub fn should_close(&mut self) -> bool {
         self.window.should_close()
@@ -56,7 +55,14 @@ impl KartApple {
     }
     /// First to be called in the start function, this method initializes gl and calls the scaffolds on_init method.
     unsafe fn init(&mut self, scaffold: &mut impl AppScaffold) {
+
+
+        self.window.glfw_win.set_key_polling(true);
+        self.window.glfw_win.set_framebuffer_size_polling(true);
+        self.window.glfw_win.make_current();
+
         self.window.init_gl();
+
         scaffold.on_init(self);
     }
     /// Sets the program for this KartApple application. this reference will used for various gl operations
@@ -74,9 +80,8 @@ impl KartApple {
     }
     /// Iterates over the window events and invokes the appropriate Scaffold method depending on the WindowEvent variant.
     unsafe fn process_events(&mut self, scaffold: &mut impl AppScaffold) {
-        let mut events: Vec<(f64, WindowEvent)> = flush_messages(&self.window.events)
-            .into_iter()
-            .collect();
+        let mut events: Vec<(f64, WindowEvent)> =
+            flush_messages(&self.window.events).into_iter().collect();
 
         for (_, event) in events {
             match event {
@@ -93,5 +98,7 @@ impl KartApple {
     /// Wrapper method for AppScaffold's on_clean. For future implementation of abstracted clean up.
     unsafe fn shutdown(&mut self, scaffold: &mut impl AppScaffold) {
         scaffold.on_clean(self);
+
+        glfw::ffi::glfwTerminate();
     }
 }

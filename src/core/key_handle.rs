@@ -13,4 +13,3 @@ impl KeyHandler for DefaultKeyHandler {
     fn on_key_released(&mut self) {}
     fn on_key_up(&mut self) {}
 }
-
