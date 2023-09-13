@@ -65,11 +65,6 @@ impl KartApple {
 
         scaffold.on_init(self);
     }
-    /// Sets the program for this KartApple application. this reference will used for various gl operations
-    pub fn set_program(&mut self, program_id: GLuint) {
-        self.program = Some(program_id);
-    }
-
     /// General method which is called on each iteration of the render loop. This in turn calls the scaffold's on_loop method as well
     /// as swapping the frame buffers and calculating the delta time.
     pub unsafe fn update(&mut self, scaffold: &mut impl AppScaffold) {
@@ -98,7 +93,5 @@ impl KartApple {
     /// Wrapper method for AppScaffold's on_clean. For future implementation of abstracted clean up.
     unsafe fn shutdown(&mut self, scaffold: &mut impl AppScaffold) {
         scaffold.on_clean(self);
-
-        glfw::ffi::glfwTerminate();
     }
 }
