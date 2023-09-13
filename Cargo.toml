@@ -1,6 +1,6 @@
 [package]
 name = "kart-apple-gl"
-version = "0.4.1"
+version = "0.4.2"
 edition = "2021"
 authors = ["Carter"]
 description = "a graphics engine using gl, glfw, and cgmath (kart-graphics-engine > KartApple-GL > kartapple-gl"
