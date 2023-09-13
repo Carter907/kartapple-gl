@@ -25,7 +25,6 @@ impl DeltaTime {
 
 pub struct KartApple {
     pub window: Window<DefaultKeyHandler>,
-    pub program: Option<GLuint>,
     pub delta: DeltaTime,
 }
 
@@ -38,7 +37,6 @@ impl KartApple {
     pub unsafe fn start(mut scaffold: impl AppScaffold, width: u32, height: u32, title: &str) {
         let mut kartapple = KartApple {
             window: Window::new(width, height, title),
-            program: None,
             delta: DeltaTime {
                 total_time: 0,
                 value: 0,
