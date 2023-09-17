@@ -2,7 +2,7 @@ extern crate gl;
 extern crate glfw;
 
 use std::sync::mpsc::Receiver;
-use glfw::{Context, FAIL_ON_ERRORS, Glfw, WindowEvent, WindowMode};
+use glfw::{Context, Glfw, WindowEvent, WindowMode};
 
 
 /// utility class for handling glfw windows and events.
@@ -17,7 +17,7 @@ pub struct Window {
 
 impl Window {
     pub fn new(width: u32, height: u32, title: &str) -> Window {
-        let mut glfw = glfw::init(FAIL_ON_ERRORS).unwrap();
+        let mut glfw = glfw::init_no_callbacks().unwrap();
         let (mut window, events) = glfw
             .create_window(width, height, title, WindowMode::Windowed)
             .expect("Failed to create GLFW window.");
