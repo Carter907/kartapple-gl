@@ -73,9 +73,9 @@ dependencies = [
 
 [[package]]
 name = "glfw"
-version = "0.52.0"
+version = "0.53.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "193969ebf8ae47af8c66c38d0cc64dab4868f57f2e7f2b15f5719829748aec51"
+checksum = "0e7fd55342491ead96820a367cd55808115f47f1dc9a643ae825a2655989b73e"
 dependencies = [
  "bitflags",
  "glfw-sys",
@@ -95,7 +95,7 @@ dependencies = [
 
 [[package]]
 name = "kart-apple-gl"
-version = "0.4.2"
+version = "0.4.4"
 dependencies = [
  "cgmath",
  "gl",

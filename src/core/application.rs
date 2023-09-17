@@ -1,10 +1,11 @@
 use crate::core::scaffold::AppScaffold;
 use crate::core::window::Window;
+use gl::types::GLuint;
 use glfw::{flush_messages, Action, Key, WindowEvent, Context};
-
+use std::alloc::System;
+use std::io::Read;
+use std::ops::Deref;
 use std::time::SystemTime;
-use crate::core::handlers::key_handler::{DefaultKeyHandler, KeyHandler};
-use crate::core::handlers::mouse_handler::DefaultMouseHandler;
 
 /// used to calculate and store helpful time calculations such as delta time and total time since game loop
 pub struct DeltaTime {
@@ -22,7 +23,7 @@ impl DeltaTime {
 }
 
 pub struct KartApple {
-    pub window: Window<DefaultKeyHandler, DefaultMouseHandler>,
+    pub window: Window,
     pub delta: DeltaTime,
 }
 
@@ -48,9 +49,6 @@ impl KartApple {
             kartapple.update(&mut scaffold);
         }
         kartapple.shutdown(&mut scaffold);
-    }
-    pub fn set_key_handler(&mut self, key_handler: impl KeyHandler) {
-        self.window.key_handler = Some(key_handler);
     }
     /// First to be called in the start function, this method initializes gl and calls the scaffolds on_init method.
     unsafe fn init(&mut self, scaffold: &mut impl AppScaffold) {
@@ -80,10 +78,10 @@ impl KartApple {
         for (_, event) in events {
             match event {
                 WindowEvent::MouseButton(button, action, modifiers) => {
-                    self.window.mouse_handler.on_event(button, action, modifiers);
+                    scaffold.on_mouse(button, action, modifiers, self)
                 }
                 WindowEvent::Key(key, scancode, action, modifiers) => {
-                    self.window.key_handler(key, scancode, action, modifiers, self)
+                    scaffold.on_key(key, scancode, action, modifiers, self)
                 }
                 WindowEvent::FramebufferSize(width, height) => {
                     scaffold.on_resize(width, height, self);

@@ -6,4 +6,3 @@ pub mod index;
 pub mod scaffold;
 pub mod uniform;
 pub mod window;
-pub mod handlers;

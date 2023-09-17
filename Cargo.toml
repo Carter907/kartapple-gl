@@ -1,6 +1,6 @@
 [package]
 name = "kart-apple-gl"
-version = "0.4.3"
+version = "0.4.4"
 edition = "2021"
 authors = ["Carter"]
 description = "a graphics engine using gl, glfw, and cgmath (kart-graphics-engine > KartApple-GL > kartapple-gl"
@@ -10,6 +10,6 @@ repository = "https://github.com/Carter907/kartapple-gl"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-glfw = "0.52.0"
+glfw = "0.53.0"
 gl = "0.14.0"
 cgmath = "0.18.0"

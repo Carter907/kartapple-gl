@@ -17,7 +17,7 @@ mod test {
     use crate::util::program_utils::ProgramUtils;
     use crate::{gl, glfw};
     use gl::types::GLuint;
-    use glfw::{Action, Key, Modifiers, Scancode};
+    use glfw::{Action, Key, Modifiers, MouseButton, Scancode};
     use std::f32::consts::PI;
 
     #[test]
@@ -183,14 +183,18 @@ mod test {
             gl::DrawArrays(gl::QUADS, 0, 24);
         }
 
-        unsafe fn on_key(
-            &mut self,
-            key: Key,
-            scancode: Scancode,
-            action: Action,
-            modifiers: Modifiers,
-            app: &mut KartApple,
-        ) {
+        unsafe fn on_key(&mut self, key: Key, scancode: Scancode, action: Action, modifiers: Modifiers, app: &mut KartApple) {
+            println!("key: {key:?}");
+
+            match key {
+                Key::W => {
+                    self.degrees += 1.0;
+                }
+                _ => {}
+            }
+        }
+
+        unsafe fn on_mouse(&mut self, button: MouseButton, action: Action, modifiers: Modifiers, app: &mut KartApple) {
         }
 
         unsafe fn on_resize(&mut self, width: i32, height: i32, app: &mut KartApple) {
