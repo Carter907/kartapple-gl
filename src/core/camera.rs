@@ -71,4 +71,5 @@ impl Camera {
     pub fn translate_view_x(&mut self, angle: f32) {
         self.view = self.view * Matrix4::from_translation(Vector3::new(angle, 0f32, 0f32));
     }
+
 }

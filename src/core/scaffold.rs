@@ -12,6 +12,8 @@ pub trait AppScaffold {
         modifiers: Modifiers,
         app: &mut KartApple,
     );
+
+    
     unsafe fn on_resize(&mut self, width: i32, height: i32, app: &mut KartApple);
     unsafe fn on_clean(&mut self, app: &mut KartApple);
 }

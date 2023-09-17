@@ -1,7 +1,7 @@
 use gl::types::{GLint, GLuint};
 use std::any::Any;
 use std::ffi::CString;
-/// utility struct for Uniforms. does not store Uniform handle; it's similar to core::Attribute
+/// utility struct for Uniforms. does not store Uniform handlers; it's similar to core::Attribute
 pub struct Uniform {}
 
 impl Uniform {
