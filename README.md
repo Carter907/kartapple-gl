@@ -11,25 +11,26 @@
 - Easy to use for beginners
 
 ```rust
-fn main() {
-    unsafe {
-        let mut app = Kartappl::new(700, 500, "KartApple-GL");
-        app.init();
+impl AppScaffold for PrismGL {
+    unsafe fn on_init(&mut self, app: &mut KartApple) {
         gl::Enable(gl::DEPTH_TEST);
 
-        let mut program = GLuint::from(1u32);
         let vert_code = include_str!("../shaders/vert.glsl").to_string();
         let frag_code = include_str!("../shaders/frag.glsl").to_string();
 
-        program = ProgramUtils::create_program(&vert_code, &frag_code);
+        self.program = ProgramUtils::create_program(&vert_code, &frag_code);
 
-        app.set_program(program);
-        
+        let mut vao = GLuint::from(1u32);
+        gl::GenVertexArrays(1, &mut vao);
+        gl::BindVertexArray(vao);
+        self.vao = vao;
+        let side_length = 0.75f32;
+
         //...
     } 
 }
 ```
-![Picture_of_3D_cube.png](github%2Fassets%2FPicture_of_3D_cube.png)
+![picture of a cube with code](github%2Fassets%2Fss1.png)
 ## Requirements
 
 - must have cmake installed for glfw
@@ -42,5 +43,6 @@ choco install cmake
 
 ## Quick Start
 
+- implement the Scaffold trait and pass it in as an argument to KartApple.start
 
 
